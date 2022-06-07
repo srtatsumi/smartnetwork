@@ -68,11 +68,10 @@ if (isset($_SESSION['uid'])) {
   }
   if (isset($_POST['widthdraw-money'])) {
     $money = $_POST['money'];
-    $upi = $_POST['upi'];
     if ($money > $row['wallet']) {
       echo "<script>alert('You do not have enough amount in your wallet.');</script>";
     } else {
-      $sql = "update `joinus-data` set widthdraw='$money', bank_details='$upi' where u_id='$u_id'";
+      $sql = "update `joinus-data` set widthdraw='$money' where u_id='$u_id'";
       if ($conn->query($sql)) {
         echo "<script>alert('Your money will be credited in an hour');</script>";
       } else
@@ -380,7 +379,7 @@ if (isset($_SESSION['uid'])) {
 
                 <form action="" class="form">
                   <input type="number" name="money" class="form-control" required placeholder="Enter Amount">
-                  <input type="text" name="upi" class="form-control" required placeholder="UPI Id : xxxxxxxxxx@smartnetwork">
+                  <!-- <input type="text" name="upi" class="form-control" required placeholder="UPI Id : xxxxxxxxxx@smartnetwork"> -->
                   <!-- <button type="reset" class="btn btn-danger m-2">Cancel</button> -->
                   <button type="submit" class="btn btn-success m-2" name="widthdraw-money">Submit</button>
                 </form>
@@ -1330,7 +1329,6 @@ if (isset($_SESSION['uid'])) {
       var uid = document.getElementById('uid').value;
       var length = document.getElementById('addcount').value;
       var d = new Date();
-      // var length = 9;
       $.post('add-count.php', {
         userid: uid,
         length: length,

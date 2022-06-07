@@ -46,8 +46,8 @@ if (isset($_POST['submit'])) {
       $level = $row['level']+1;
 
 
-      $sql = "INSERT INTO joinus (fname, lname, email, phno, uid, ref_code, my_ref_code, address, pwd, txn_id, status,wallet,level)
-        VALUES ('$fname', '$lname', '$email', '$phno', '$uid', '$ref_code', '$my_ref_id', '$address', '$pwd', 'None', 'Deactivate','30','$level')";
+      $sql = "INSERT INTO joinus (fname, lname, email, phno, uid, ref_code, my_ref_code, address, pwd, txn_id, status,level)
+        VALUES ('$fname', '$lname', '$email', '$phno', '$uid', '$ref_code', '$my_ref_id', '$address', '$pwd', 'None', 'Deactivate','$level')";
       if ($conn->query($sql)) {
 
         // Retrieving the id of user from joinus table

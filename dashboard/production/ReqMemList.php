@@ -9,8 +9,6 @@
     $sql = "UPDATE joinus SET status='Activate' WHERE id=$memberId";
 
     if ($conn->query($sql) === TRUE) {
-        $sql = "update joinus set wallet=30 where id='$memberId'";
-        $conn->query($sql);
         $sql = "select * from `joinus-data` where u_id='$memberId'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
@@ -33,8 +31,7 @@
           }
           $sql = "update `joinus-data` set wallet=wallet+'$inc' where my_ref_code='$ref_code'";
           $conn->query($sql);
-          $sql = "update `joinus` set wallet=wallet+'$inc' where my_ref_code='$ref_code'";
-          $conn->query($sql);
+          
           $i++;
           $sql = "select * from `joinus-data` where my_ref_code = '$ref_code'" ;
           $result = $conn->query($sql);
