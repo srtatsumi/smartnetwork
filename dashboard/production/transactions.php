@@ -17,13 +17,14 @@ if (isset($_SESSION['uid'])) {
   $status = $data['status'];
   $txn = $data['txn_id'];
   $ref_code = $data['ref_code'];
-  $wallet = $data['wallet'];
+
   $level = $data['level'];
   $u_id = $data['id'];
   date_default_timezone_set('Asia/Kolkata');
   $sql = "select * from `joinus-data` where u_id='$u_id'";
   $result = $conn->query($sql);
   $row = mysqli_fetch_assoc($result);
+  $wallet = $row['wallet'];
   $today =  date("Y-m-d");
   
   $redeemed_date=date("Y-m-d",strtotime($row['last_redeemed']));
