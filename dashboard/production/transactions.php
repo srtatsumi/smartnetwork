@@ -405,7 +405,7 @@ if (isset($_SESSION['uid'])) {
           <div class="modal-body">
             <form action="./addbankdetails.php" class="form" method="post">
               <input type="text" name="bank_accnt_num" class="form-control" placeholder='Bank Account Number' required>
-              <input type="text" name="bank_accnt_name" class="form-control" placeholder='Bank Account Name' required>
+              <input type="text" name="bank_accnt_name" class="form-control" placeholder='Bank Name' required>
               <input type="text" name="bank_ifsc_code" class="form-control" placeholder='Bank IFSC Code' required>
               <!-- <textarea name="bank_details" class="form-control" placeholder='Bank Account Details' required></textarea> -->
               <button class="btn btn-danger m-2" data-bs-dismiss="modal">Cancel</button>
