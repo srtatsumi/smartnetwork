@@ -58,6 +58,9 @@ if (isset($_SESSION['uid'])) {
           $total_price = (int)$wal_val + (int)$exist_price;
           $sql = "UPDATE `joinus-data` SET wallet = '$total_price' WHERE my_ref_code = '$ref'";
           
+          $transactionsql="INSERT INTO `transactions`(`u_id`, `mode`, `amount`) VALUES ('$data[u_id]','1','$wal_val')";
+          $conn->query($transactionsql);
+          
           $res = $conn->query($sql);
           if($res == true){
             echo '<script>alert("Successfully, updated !!!")</script>';

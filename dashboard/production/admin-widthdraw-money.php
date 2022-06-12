@@ -41,29 +41,32 @@ if (isset($_SESSION['uid'])) {
     // END OF GET REQUESTED MEMBER
 
 
-    if (isset($_SESSION['uid'])) {
+    if(isset($_SESSION['uid'])){
         include("../../dbconfig.php");
         $uid = $_SESSION['uid'];
-        if (isset($_POST['wal_sub'])) {
-            $ref = $_POST['ref'];
-
-            $sql_prev = "SELECT * FROM joinus WHERE my_ref_code = '$ref'";
-            $res_prev = $conn->query($sql_prev);
-
-            $data = mysqli_fetch_assoc($res_prev);
-
-            $exist_price = $data['wallet'];
-
-            $wal_val = $_POST['wal_val'];
-            $total_price = (int)$wal_val + (int)$exist_price;
-            $sql = "UPDATE joinus SET wallet = '$total_price' WHERE my_ref_code = '$ref'";
-
-            $res = $conn->query($sql);
-            if ($res == true) {
-                echo '<script>alert("Successfully, updated !!!")</script>';
-            } else {
-                echo '<script>alert("Oops! Something went wrong...")</script>';
-            }
+        if(isset($_POST['wal_sub'])){
+          $ref = $_POST['ref'];
+          
+          $sql_prev = "SELECT * FROM `joinus-data` WHERE my_ref_code = '$ref'";
+          $res_prev = $conn->query($sql_prev);
+          
+          $data = mysqli_fetch_assoc($res_prev);
+          
+          $exist_price = $data['wallet'];
+          
+          $wal_val = $_POST['wal_val'];
+          $total_price = (int)$wal_val + (int)$exist_price;
+          $sql = "UPDATE `joinus-data` SET wallet = '$total_price' WHERE my_ref_code = '$ref'";
+          
+          $transactionsql="INSERT INTO `transactions`(`u_id`, `mode`, `amount`) VALUES ('$data[u_id]','1','$wal_val')";
+          $conn->query($transactionsql);
+          
+          $res = $conn->query($sql);
+          if($res == true){
+            echo '<script>alert("Successfully, updated !!!")</script>';
+          }else{
+            echo '<script>alert("Oops! Something went wrong...")</script>';
+          }
         }
     }
     if(isset($_POST['ad_sub'])):

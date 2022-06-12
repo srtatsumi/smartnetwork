@@ -76,8 +76,11 @@ if (isset($_SESSION['uid'])) {
 
             $sql = "update `joinus-data` set redeemed='1' where u_id='$u_id'";
             $conn->query($sql);
-
-            $sql = "update `joinus-data` set wallet=wallet+'45' where ref_code='$ref_code'";
+            if(empty($ref_code)){
+                $sql = "update `joinus-data` set wallet=wallet+'45' where ref_code IS NULL";
+            }else{
+                $sql = "update `joinus-data` set wallet=wallet+'45' where ref_code='$ref_code'";
+            }
             $conn->query($sql);
 
             $sql = "INSERT INTO `transactions`(`u_id`, `mode`, `amount`) VALUES ('$u_id','1','45')";
