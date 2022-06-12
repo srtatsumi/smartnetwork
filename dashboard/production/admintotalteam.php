@@ -299,7 +299,14 @@
                                                         <tr>
                                                             <td><?php echo $row['fname']." ".$row['lname'];?></td>
                                                             <td><?php echo $row['ref_code'];?></td>
-                                                            <td><?php echo $row['wallet'];?></td>
+                                                            <td>
+                                                                <?php
+                                                                    $wallsql="SELECT wallet FROM `joinus-data` WHERE u_id=$row[id]";
+                                                                    $wallval=$conn->query($wallsql);
+                                                                    $wallamnt = mysqli_fetch_assoc($wallval);
+                                                                    echo ($wallamnt["wallet"]);
+                                                                ?>
+                                                            </td>
                                                             <td><?php echo $row['my_ref_code'];?></td>
                                                             <td><?php echo $first;?></td>
                                                             <td><?php echo $second;?></td>

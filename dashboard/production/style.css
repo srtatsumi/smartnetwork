@@ -69,7 +69,8 @@ p {
 
  div.colored_card {
   /* min-width: 100%; */
-  /* min-height: 95%; */
+  min-height: 50px;
+  border: 2px solid;
   border-radius: 10px;
   display: flex;
   justify-content: center;
