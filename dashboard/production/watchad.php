@@ -468,82 +468,64 @@ if (isset($_SESSION['uid'])) {
       <!-- /top navigation -->
 
       <!-- HAAT MAT LAGAO -->
-      <div class="right_col" role="main">
-        <div class="tile_count">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 ">
-              <div class="tile_count">
-                <div class="row x_title">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- HAT MAT LAGAO END -->
-
-        <!-- Header Count Sayed -->
-        <div class="row">
-          <div class="col-md-12 col-sm-12 ">
+        <div class="right_col" role="main">
             <div class="tile_count">
-              <div class="row x_title">
-                <?php
-                $sql = "select * from transactions where u_id='$u_id' order by id desc";
-                $result = $conn->query($sql);
-                if (mysqli_num_rows($result) > 0) {
-                ?>
-                  <div class="div container w-50 table-responsive  ">
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <th>Time</th>
-                          <th>Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        while ($r = mysqli_fetch_assoc($result)) {
-                          $dt =strtotime($r['date']);
-
-                        ?>
-                          <tr>
-                            <td><?php echo date('d-m-Y',$dt); ?></td>
-                            <td><?php echo date('H:i:s',$dt); ?></td>
-                            <?php if ($r['mode'] == 0) {
-                              echo '<td class="text-danger"> - ' . $r['amount'] . '</td>';
-                            } else {
-                              echo '<td class="text-success"> + ' . $r['amount'] . '</td>';
-                            } ?>
-                          </tr>
-                        <?php
-                        }
-                        ?>
-                      </tbody>
-                    </table>
-                  </div>
-                <?php
-                } else {
-                  echo '<p class="text-center">No Transaction Found</p>';
-                }
-                ?>
-              </div>
+                <div class="row">
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="tile_count">
+                    <div class="row x_title">
+                    </div>
+                    </div>
+                </div>
+                </div>
             </div>
-          </div>
+            <!-- HAT MAT LAGAO END -->
+            <!-- Header Count Sayed -->
+            
+                <?php 
+                    $adssql = "SELECT * FROM adds";
+                    $adres = $conn->query($adssql);
+                    if($adres->num_rows<1){
+                        echo "No Ads found";
+                    }
+                    $i=1;
+                ?>
+            <div id="">
+                <div class="row">
+                <input type="hidden" name="uid" id="uid" value="<?php echo $uid; ?>">
+                <input type="hidden" name="adcount" id="adcount" value="<?php echo $adres->num_rows; ?>">
+                <?php
+                    
+                    while($addata = mysqli_fetch_assoc($adres)):
+
+                ?>
+                    
+                    <div class="colored_card col-md-2 col-sm-6">
+                        <a href="<?php echo $addata["add_url"] ?>" target="_blank" data-value="<?php echo $i ?>" class="addlink" onclick="seeadd(this);">Click To See Ad</a>
+                    </div>
+                    
+                <?php
+                    $i++;
+                    endwhile;
+                ?>
+                    <!------adsence----->
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7556331893650213" crossorigin="anonymous"></script>
+                    <!----close---->
+                </div>
+            </div>
+            
+            <!-- Header Count Sayed End-->
         </div>
-
-
-        <!-- Header Count Sayed End-->
-        <!----AdBlock---->
-      </div>
-      <!-- footer content -->
-      <footer>
-        <div class="pull-right">
-          All rights reserved. Copyright © <script>
-            document.write(new Date().getFullYear())
-          </script> Smart Network by <a>Healing Buddy Technologies</a>. </div>
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            All rights reserved. Copyright © <script>
+              document.write(new Date().getFullYear())
+            </script> Smart Network by <a>Healing Buddy Technologies</a>. </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      
     </div>
 
     <!-- jQuery -->
@@ -629,8 +611,10 @@ if (isset($_SESSION['uid'])) {
       function seeadd(d) {
         var addno = $(d).data('value');
         var uid = document.getElementById('uid').value;
+        var adcount = document.getElementById('adcount').value;
+        // console.log(adcount);
         var d = new Date();
-        var length = 9;
+        var length = adcount;
         $.post('add-count.php', {
           userid: uid,
           length: length,

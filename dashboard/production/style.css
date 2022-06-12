@@ -67,9 +67,9 @@ p {
   border-radius: 10px;
 }
 
-.gallery_scroller div.colored_card {
-  min-width: 100%;
-  min-height: 95%;
+ div.colored_card {
+  /* min-width: 100%; */
+  /* min-height: 95%; */
   border-radius: 10px;
   display: flex;
   justify-content: center;

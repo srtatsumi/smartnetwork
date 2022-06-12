@@ -93,7 +93,7 @@ if (isset($_SESSION['uid'])) {
                     $inc = 5;
                 } elseif ($i == 2) {
                     $inc = 2;
-                } else {
+                } elseif ($i == 3) {
                     $inc = 1;
                 }
                 $sql = "update `joinus-data` set wallet=wallet+'$inc' where my_ref_code='$ref_code'";

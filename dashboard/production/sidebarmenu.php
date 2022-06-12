@@ -8,8 +8,8 @@
                 <i class="fa fa-home"></i> Home
             </a>
         </li>
-        <li>
-        <form>
+        <!-- <li> -->
+        <!-- <form>
     <button style="background-color: transparent;
   color: white;
   padding: 5px 15px;
@@ -17,12 +17,17 @@
   cursor: pointer;
   border: none;" type="submit" formaction="https://rzp.io/l/8usToKi">Pay</button>
   </form>
+        </li> -->
+        <li>
+           <a href="watchad.php">
+               <i class="fa fa-adn"></i>Watch Ads
+           </a>
         </li>
-        <!--<li data-bs-toggle="modal" data-bs-target="#exampleModal2">-->
-        <!--    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal2">-->
-        <!--        <i class="fa fa-money"></i>Pay-->
-        <!--    </a>-->
-        <!--</li>-->
+        <li>
+           <a href="https://rzp.io/l/8usToKi">
+               <i class="fa fa-money"></i>Pay
+           </a>
+        </li>
         <li data-bs-toggle="modal" data-bs-target="#exampleModal">
             <a href="javascript:;">
                 <i class="fa fa-clone"></i>Update Transaction ID
@@ -43,9 +48,9 @@
                 <i class="fa fa-clone"></i>Transactions
             </a>
         </li>
-         <li data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <li data-bs-toggle="modal" data-bs-target="#exampleModal">
             <a href="./change_password.php">
-                <i class="fa fa-password"></i>Change Password
+                <i class="fa fa-key"></i>Change Password
             </a>
         </li>
         

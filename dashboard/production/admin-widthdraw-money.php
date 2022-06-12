@@ -66,6 +66,16 @@ if (isset($_SESSION['uid'])) {
             }
         }
     }
+    if(isset($_POST['ad_sub'])):
+        $url=$_POST['add_url'];
+        $adsql="INSERT INTO `adds`(`add_url`) VALUES ('$url')";
+        $adinsert= $conn->query($adsql);
+        if($adinsert){
+            echo "<script>alert('Added Successfully')</script>";
+        }else{
+            echo "<script>alert('Not Added')</script>";
+        }
+    endif;
 } else {
     // header("Location: ../../pages/sign-in.php");
     echo '<script>document.location.href="../../sign-in.php"</script>';
@@ -184,6 +194,27 @@ if (isset($_SESSION['uid'])) {
                     </div>
                 </div>
             </div>
+            <!--Add Ads Modal-->
+            <div class="modal fade" id="exampleModalAd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Ads</h5>
+                    </div>
+                    <form action="" method="POST">
+                        <div class="modal-body">
+                            <div class="input-group">
+                            <input type="text" name="add_url" placeholder="Enter the Ad Url" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" name="ad_sub">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
 
             <!-- HAAT MAT LAGAO -->
             <div class="right_col" role="main">
@@ -256,13 +287,13 @@ if (isset($_SESSION['uid'])) {
 
                                 ?>
                                         <tr>
-                                            <td><?php echo $r1['uid']; ?></th>
-                                            <td><?php echo $r['ref_code']; ?></th>
-                                            <td><?php echo $r['wallet']; ?></th>
-                                            <td><?php echo $r['widthdraw']; ?></th>
-                                            <td><?php echo $r['bank_details']; ?></th>
-                                            <td><button class="btn btn-primary m-0 p-1" data-id="<?php echo $user_id ?>" onclick="approve(this)">Approve</button></th>
-                                            <td><button class="btn btn-danger m-0 p-1" data-id="<?php echo $user_id; ?>" onclick="decline(this)">Decline</button></th>
+                                            <td><?php echo $r1['uid']; ?></td>
+                                            <td><?php echo $r['ref_code']; ?></td>
+                                            <td><?php echo $r['wallet']; ?></td>
+                                            <td><?php echo $r['widthdraw']; ?></td>
+                                            <td><?php echo $r['bank_details']; ?></td>
+                                            <td><button class="btn btn-primary m-0 p-1" data-id="<?php echo $user_id ?>" onclick="approve(this)">Approve</button></td>
+                                            <td><button class="btn btn-danger m-0 p-1" data-id="<?php echo $user_id; ?>" onclick="decline(this)">Decline</button></td>
                                         </tr>
                                 <?php
 
@@ -333,9 +364,9 @@ if (isset($_SESSION['uid'])) {
             function approve(d){
                 var id = $(d).data('id');
                 $.post('admin-widthdraw-approve.php', {
-            id: id ,
-            name : "approve"
-          })
+                    id: id ,
+                    name : "approve"
+                })
           location.reload();
             }
             function decline(d){

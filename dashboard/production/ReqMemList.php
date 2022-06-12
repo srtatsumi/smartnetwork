@@ -23,13 +23,15 @@
         $i = 1;
         while($result->num_rows!=0){
           if($i==1){
-            $inc = 30;
+            $inc =0;// 30;
           }elseif($i==2){
-            $inc = 15;
-          }elseif($i==3 || $i==4){
-            $inc = 10;
+            $inc =30;// 15;
+          }elseif($i==3){
+            $inc =15;// 10;
+          }elseif($i==4 || $i==5){
+            $inc =10;// 5;
           }else{
-            $inc = 5;
+            $inc=5;
           }
           $sql = "update `joinus-data` set wallet=wallet+'$inc' where my_ref_code='$ref_code'";
           $conn->query($sql);

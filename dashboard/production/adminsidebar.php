@@ -9,8 +9,25 @@
         </li>
         <li data-bs-toggle="modal" data-bs-target="#exampleModalMoney">
             <a href="javascript:;">
-                <i class="fa fa-inr"></i>My Wallet
+                <i class="fa fa-inr"></i>Update Wallet
             </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-adn"></i> Ads Section
+            </a>
+            <ul class="child-nav" style="display: none;">    
+                <li data-bs-toggle="modal" data-bs-target="#exampleModalAd">
+                    <a href="#">
+                        <i class="fa fa-adn"></i> Add Ads
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-see-ad.php">
+                        <i class="fa fa-adn"></i> See Ads
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="admin-widthdraw-money.php">

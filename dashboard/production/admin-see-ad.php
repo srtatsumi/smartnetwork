@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION['uid'])) {
     include("../../dbconfig.php");
     $uid = $_SESSION['uid'];
-    
+
     // echo $uid;
 
     // GET USER DATA FOR NOW NAME ONLY.
@@ -39,33 +39,34 @@ if (isset($_SESSION['uid'])) {
     $n = mysqli_num_rows($res);
     $total_req_member = $n . "+";
     // END OF GET REQUESTED MEMBER
-    
-    
-    if(isset($_SESSION['uid'])){
+
+
+    if (isset($_SESSION['uid'])) {
         include("../../dbconfig.php");
         $uid = $_SESSION['uid'];
-        if(isset($_POST['wal_sub'])){
-          $ref = $_POST['ref'];
-          
-          $sql_prev = "SELECT * FROM `joinus-data` WHERE my_ref_code = '$ref'";
-          $res_prev = $conn->query($sql_prev);
-          
-          $data = mysqli_fetch_assoc($res_prev);
-          
-          $exist_price = $data['wallet'];
-          
-          $wal_val = $_POST['wal_val'];
-          $total_price = (int)$wal_val + (int)$exist_price;
-          $sql = "UPDATE `joinus-data` SET wallet = '$total_price' WHERE my_ref_code = '$ref'";
-          
-          $res = $conn->query($sql);
-          if($res == true){
-            echo '<script>alert("Successfully, updated !!!")</script>';
-          }else{
-            echo '<script>alert("Oops! Something went wrong...")</script>';
-          }
+        if (isset($_POST['wal_sub'])) {
+            $ref = $_POST['ref'];
+
+            $sql_prev = "SELECT * FROM joinus WHERE my_ref_code = '$ref'";
+            $res_prev = $conn->query($sql_prev);
+
+            $data = mysqli_fetch_assoc($res_prev);
+
+            $exist_price = $data['wallet'];
+
+            $wal_val = $_POST['wal_val'];
+            $total_price = (int)$wal_val + (int)$exist_price;
+            $sql = "UPDATE joinus SET wallet = '$total_price' WHERE my_ref_code = '$ref'";
+
+            $res = $conn->query($sql);
+            if ($res == true) {
+                echo '<script>alert("Successfully, updated !!!")</script>';
+            } else {
+                echo '<script>alert("Oops! Something went wrong...")</script>';
+            }
         }
     }
+
     if(isset($_POST['ad_sub'])):
         $url=$_POST['add_url'];
         $adsql="INSERT INTO `adds`(`add_url`) VALUES ('$url')";
@@ -76,8 +77,6 @@ if (isset($_SESSION['uid'])) {
             echo "<script>alert('Not Added')</script>";
         }
     endif;
-
-
 } else {
     // header("Location: ../../pages/sign-in.php");
     echo '<script>document.location.href="../../sign-in.php"</script>';
@@ -94,6 +93,9 @@ if (isset($_SESSION['uid'])) {
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
     <title>Smart Network</title>
+    <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -113,7 +115,7 @@ if (isset($_SESSION['uid'])) {
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-    
+
     <!-- Bootstrap for modal -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
@@ -141,7 +143,7 @@ if (isset($_SESSION['uid'])) {
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
-                    
+
                     <br />
 
                     <!-- sidebar menu -->
@@ -170,27 +172,27 @@ if (isset($_SESSION['uid'])) {
             <!-- top navigation -->
             <?php include("admintopnav.php"); ?>
             <!-- /top navigation -->
-            
+
             <!--Wallet Modal-->
             <div class="modal fade" id="exampleModalMoney" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Update Wallet</h5>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update Wallet</h5>
+                        </div>
+                        <form action="?" method="POST">
+                            <div class="modal-body">
+                                <div class="input-group">
+                                    <input type="text" name="ref" placeholder="Enter the referal code" class="form-control">
+                                    <input type="text" name="wal_val" placeholder="Enter the amount" class="form-control">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" name="wal_sub">submit</button>
+                            </div>
+                        </form>
                     </div>
-                    <form action="" method="POST">
-                        <div class="modal-body">
-                          <div class="input-group">
-                            <input type="text" name="ref" placeholder="Enter the referal code" class="form-control">
-                            <input type="text" name="wal_val" placeholder="Enter the amount" class="form-control">
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary" name="wal_sub">Submit</button>
-                        </div>
-                    </form>
-                </div>
                 </div>
             </div>
             <!--Add Ads Modal-->
@@ -260,71 +262,37 @@ if (isset($_SESSION['uid'])) {
 
 
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 ">
-                        <div class="dashboard_graph">
-
-                            <div class="row x_title">
-                                <div class="col-md-6">
-                                    <h3>Network Activities <small>Graph title sub-title</small></h3>
-                                </div>
-                                <div class="col-md-6">
-                                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-9 col-sm-9 ">
-                                <div id="chart_plot_01" class="demo-placeholder"></div>
-                            </div>
-                            <div class="col-md-3 col-sm-3  bg-white">
-                                <div class="x_title">
-                                    <h2>Top Campaign Performance</h2>
-                                    <div class="clearfix"></div>
-                                </div>
-
-                                <div class="col-md-12 col-sm-12 ">
-                                    <div>
-                                        <p>Facebook Campaign</p>
-                                        <div class="">
-                                            <div class="progress progress_sm" style="width: 76%;">
-                                                <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p>Twitter Campaign</p>
-                                        <div class="">
-                                            <div class="progress progress_sm" style="width: 76%;">
-                                                <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-sm-12 ">
-                                    <div>
-                                        <p>Conventional Media</p>
-                                        <div class="">
-                                            <div class="progress progress_sm" style="width: 76%;">
-                                                <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p>Bill boards</p>
-                                        <div class="">
-                                            <div class="progress progress_sm" style="width: 76%;">
-                                                <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="clearfix"></div>
-                        </div>
+                    <div class="col-md-12 col-sm-12 table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ad Url</th>
+                                    <th>Ad Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $sql = "select * from `adds`";
+                                $result = $conn->query($sql);
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($r = mysqli_fetch_assoc($result)) {
+                                ?>
+                                        <tr>
+                                            <td><?php echo $r['add_url']; ?></td>
+                                            <td><?php echo $r['add_status']; ?></td>
+                                        </tr>
+                                <?php
+                                    }
+                                }else{
+                                ?>
+                                        <tr>
+                                            <td>No ads available</td>
+                                        </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
@@ -383,6 +351,24 @@ if (isset($_SESSION['uid'])) {
 
         <!-- Custom Theme Scripts -->
         <script src="../build/js/custom.min.js"></script>
+        <script>
+            function approve(d){
+                var id = $(d).data('id');
+                $.post('admin-widthdraw-approve.php', {
+            id: id ,
+            name : "approve"
+          })
+          location.reload();
+            }
+            function decline(d){
+                var id = $(d).data('id');
+                $.post('admin-widthdraw-approve.php', {
+            id: id ,
+            name :"decline"
+          })
+          location.reload();
+            }
+        </script>
 
 </body>
 

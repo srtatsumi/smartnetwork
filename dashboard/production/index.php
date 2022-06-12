@@ -15,7 +15,7 @@ if (isset($_SESSION['uid'])) {
   $status = $data['status'];
   $txn = $data['txn_id'];
   $ref_code = $data['ref_code'];
-  $wallet = $data['wallet'];
+  // $wallet = $data['wallet'];
   $level = $data['level'];
   $u_id = $data['id'];
   date_default_timezone_set('Asia/Kolkata');
@@ -333,71 +333,74 @@ if (isset($_SESSION['uid'])) {
 
 <body class="nav-md">
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Update Your Transaction ID</h5>
-        </div>
-        <form action="?" method="POST">
-          <div class="modal-body">
-            <div class="input-group">
-              <input type="text" name="txn" class="form-control" value="<?php echo $txn ?>">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Your Transaction ID</h5>
+          </div>
+          <form action="?" method="POST">
+            <div class="modal-body">
+              <div class="input-group">
+                <input type="text" name="txn" class="form-control" value="<?php echo $txn ?>">
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" name="txn_submit">submit</button>
-          </div>
-        </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" name="txn_submit">submit</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!--Wallet Modal-->
-  <div class="modal fade" id="exampleModalMoney" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" style="text-align: center;">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">&nbsp;Your Current Balance:</h5>
-        </div>
-        <form method="post">
-          <div class="modal-body">
-            <h3><span id="withdraw-amount"><?php echo $row['wallet']; ?></span>/-</h3>
-            <span id="withdraw_notice"></span>
-            <button class="btn btn-primary m-auto" id="widthdraw-button" onclick="widthdraw()">Widthdraw</button>
-            <div id="widthdraw-form">
+    <!--Wallet Modal-->
+    <div class="modal fade" id="exampleModalMoney" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="text-align: center;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">&nbsp;Your Current Balance:</h5>
+          </div>
+          <form method="post">
+            <div class="modal-body">
+              <h3><span id="withdraw-amount"><?php echo $row['wallet']; ?></span>/-</h3>
+              <span id="withdraw_notice"></span>
+              <button class="btn btn-primary m-auto" id="widthdraw-button" onclick="widthdraw()">Widthdraw</button>
+              <div id="widthdraw-form">
 
-              <form action="" class="form">
-                <input type="number" name="money" class="form-control" required placeholder="Enter Amount">
-                <button class="btn btn-danger m-2">Cancel</button>
-                <button type="submit" class="btn btn-success m-2" name="widthdraw-money">Submit</button>
-              </form>
+                <form action="" class="form">
+                  <input type="number" name="money" class="form-control" required placeholder="Enter Amount">
+                  <button class="btn btn-danger m-2" data-bs-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-success m-2" name="widthdraw-money">Submit</button>
+                </form>
+              </div>
             </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!--Bank Details Modal-->
-  <div class="modal fade" id="exampleBank" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" style="text-align: center;">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">&nbsp;Add Bank Account</h5>
+          </form>
         </div>
-          <div class="modal-body">
-              <form action="./addbankdetails.php" class="form" method="post">
-                <textarea name="bank_details" class="form-control" placeholder='Bank Account Details' required placeholder></textarea>
-                <button class="btn btn-danger m-2">Cancel</button>
-                <button type="submit" class="btn btn-success m-2" name="add_bank">Submit</button>
-              </form>
-            </div>
-          </div>
       </div>
     </div>
-  </div>
+    <!--Bank Details Modal-->
+    <div class="modal fade" id="exampleBank" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="text-align: center;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">&nbsp;Add Bank Account</h5>
+          </div>
+          <div class="modal-body">
+            <form action="./addbankdetails.php" class="form" method="post">
+              <input type="text" name="bank_accnt_num" class="form-control" placeholder='Bank Account Number' required>
+              <input type="text" name="bank_accnt_name" class="form-control" placeholder='Bank Account Name' required>
+              <input type="text" name="bank_ifsc_code" class="form-control" placeholder='Bank IFSC Code' required>
+              <!-- <textarea name="bank_details" class="form-control" placeholder='Bank Account Details' required></textarea> -->
+              <button class="btn btn-danger m-2" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-success m-2" name="add_bank">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
   <!-- Payment Modal -->
   <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -505,234 +508,11 @@ if (isset($_SESSION['uid'])) {
           </div>
         </div>
 
-
         <!-- Header Count Sayed End-->
         <!----AdBlock---->
         <div id="paginated_gallery" class="gallery">
-
           <!--   <span class="btn prev"></span>
-  <span class="btn next"></span> -->
-        </div>
-
-
-        <div id="paginated_gallery" class="gallery">
-          <div class="gallery_scroller no_snap">
-            <input type="hidden" name="uid" id="uid" value="<?php echo $uid; ?>">
-            <div class="colored_card">
-              <p></p> <a href="//thaudray.com/4/5144612" target="_blank" data-value="1" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//thaudray.com/4/5144612" target="_blank" data-value="2" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//ashoupsu.com/4/5136581" target="_blank" data-value="3" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//dooloust.net/4/5136549" target="_blank" data-value="4" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//thaudray.com/4/5144619" target="_blank" data-value="5" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="6" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="7" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="8" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="9" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="10" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="11" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="12" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="13" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="14" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="15" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="16" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="17" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="18" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="19" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="20" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="21" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="22" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="23" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="24" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="25" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="26" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="27" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="28" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="29" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="30" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="31" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="32" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="33" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="34" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="35" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="36" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="37" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="38" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="39" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="40" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="41" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="42" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="43" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="44" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="45" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="46" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="47" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="48" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="49" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="50" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="51" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="52" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="53" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="54" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="55" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="56" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="57" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="58" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="59" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="60" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="61" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="62" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="63" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="64" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="65" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="66" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="67" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="68" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="69" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-             <div class="colored_card">
-              <p></p> <a href="//zikroarg.com/4/5051836" target="_blank" data-value="70" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
-            </div>
-            <!------adsence----->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7556331893650213" crossorigin="anonymous"></script>
-            <!----close---->
-          </div>
+          <span class="btn next"></span> -->
         </div>
    
         <!----AdBlock special---->
@@ -967,71 +747,7 @@ if (isset($_SESSION['uid'])) {
             </div>
           </div>
 
-          <div class="col-md-4 col-sm-6  widget_tally_box">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>User Uptake</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-
-                <div id="graph_bar" style="width:100%; height:200px;"></div>
-
-               
-                  </div>
-                  <div class="row">
-                    <div class="progress_title">
-                      <span class="left">Mobile Access</span>
-                      <span class="right">Smart Phone</span>
-                      <div class="clearfix"></div>
-                    </div>
-
-                    <div class="">
-                      <span>App</span>
-                    </div>
-                    <div class="">
-                      <div class="progress progress_sm">
-                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="79"></div>
-                      </div>
-                    </div>
-                    <div class=" more_info">
-                      <span>79%</span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="progress_title">
-                      <span class="left">WAN access users</span>
-                      <span class="right">Total 69%</span>
-                      <div class="clearfix"></div>
-                    </div>
-
-                    <div class="">
-                      <span>Usr</span>
-                    </div>
-                    <div class="">
-                      <div class="progress progress_sm">
-                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="69"></div>
-                      </div>
-                    </div>
-                    <div class=" more_info">
-                      <span>69%</span>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
+          
 
           <!-- start of weather widget -->
           <div class="col-md-4 col-sm-6 ">
@@ -1202,8 +918,73 @@ if (isset($_SESSION['uid'])) {
               </div>
             </div>
           </div>
-        </div>
+          
+          <div class="col-md-4 col-sm-6  widget_tally_box">
+            <div class="x_panel ">
+              <div class="x_title">
+                <h2>User Uptake</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
 
+                <div id="graph_bar" style="width:100%; height:200px;"></div>
+
+               
+                  </div>
+                  <div class="row">
+                    <div class="progress_title">
+                      <span class="left">Mobile Access</span>
+                      <span class="right">Smart Phone</span>
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="">
+                      <span>App</span>
+                    </div>
+                    <div class="">
+                      <div class="progress progress_sm">
+                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="79"></div>
+                      </div>
+                    </div>
+                    <div class=" more_info">
+                      <span>79%</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="progress_title">
+                      <span class="left">WAN access users</span>
+                      <span class="right">Total 69%</span>
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="">
+                      <span>Usr</span>
+                    </div>
+                    <div class="">
+                      <div class="progress progress_sm">
+                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="69"></div>
+                      </div>
+                    </div>
+                    <div class=" more_info">
+                      <span>69%</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>      
         <!-- footer content -->
         <footer>
           <div class="pull-right">
@@ -1343,8 +1124,8 @@ if (isset($_SESSION['uid'])) {
       form.style.display = "none";
       button.style.display = "block";
       document.getElementById("widthdraw-button").addEventListener("click", function(event){
-  event.preventDefault()
-});
+        event.preventDefault()
+      });
       function widthdraw(){
         form.style.display = "block";
         button.style.display = "none";

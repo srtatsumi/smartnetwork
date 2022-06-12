@@ -13,6 +13,7 @@ if ($_POST['name'] == "approve") {
 
     $sql = "INSERT INTO `transactions`(`u_id`, `mode`, `amount`) VALUES ('$u_id','0','$money')";
     $conn->query($sql);
+    
 }
 if ($_POST['name'] == "decline") {
     $id = $_POST['id'];
