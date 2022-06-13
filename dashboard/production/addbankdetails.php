@@ -9,7 +9,7 @@ $acnt_num=$_REQUEST['bank_accnt_num'];
 $acnt_name=$_REQUEST['bank_accnt_name'];
 $acnt_ifsc=$_REQUEST['bank_ifsc_code'];
 
-$bank_details=$bank_name.$acnt_name.$acnt_num.$acnt_ifsc;
+$bank_details="Bank Name:$bank_name \n Bank Account Holder Name: $acnt_name \n Account Number:$acnt_num \n IFSC Code:$acnt_ifsc";
 
 // $_REQUEST['bank_details']
 
