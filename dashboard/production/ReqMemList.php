@@ -9,34 +9,34 @@
     $sql = "UPDATE joinus SET status='Activate' WHERE id=$memberId";
 
     if ($conn->query($sql) === TRUE) {
-        $sql = "update joinus set wallet=30 where id='$memberId'";
-        $conn->query($sql);
+        // $sql = "update joinus set wallet=30 where id='$memberId'";
+        // $conn->query($sql);
         $sql = "select * from `joinus-data` where u_id='$memberId'";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         $tempId = $row['id'];
-        $sql = "update `joinus-data` set wallet=30 where id='$tempId'";
-        $conn->query($sql);
+        // $sql = "update `joinus-data` set wallet=30 where id='$tempId'";
+        // $conn->query($sql);
         $ref_code = $row['ref_code'];
         $sql = "select * from `joinus-data` where my_ref_code='$ref_code'";
         $result = $conn->query($sql);
         $i = 1;
         while($result->num_rows!=0){
           if($i==1){
-            $inc =0;// 30;
+            $inc =30;
           }elseif($i==2){
-            $inc =30;// 15;
-          }elseif($i==3){
-            $inc =15;// 10;
-          }elseif($i==4 || $i==5){
-            $inc =10;// 5;
+            $inc =15;
+          }elseif($i==3 || $i==4){
+            $inc =10;
+          }elseif($i==5){
+            $inc =5;
           }else{
             $inc=5;
           }
           $sql = "update `joinus-data` set wallet=wallet+'$inc' where my_ref_code='$ref_code'";
           $conn->query($sql);
-          $sql = "update `joinus` set wallet=wallet+'$inc' where my_ref_code='$ref_code'";
-          $conn->query($sql);
+        //   $sql = "update `joinus` set wallet=wallet+'$inc' where my_ref_code='$ref_code'";
+        //   $conn->query($sql);
           $i++;
           $sql = "select * from `joinus-data` where my_ref_code = '$ref_code'" ;
           $result = $conn->query($sql);
