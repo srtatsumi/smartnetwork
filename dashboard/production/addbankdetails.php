@@ -4,11 +4,12 @@ include("../../dbconfig.php");
 $uid = $_SESSION['uid'];
 $u_id=$_SESSION['u_id'];
 
+$bank_name=$_REQUEST['bank_name'];
 $acnt_num=$_REQUEST['bank_accnt_num'];
 $acnt_name=$_REQUEST['bank_accnt_name'];
 $acnt_ifsc=$_REQUEST['bank_ifsc_code'];
 
-$bank_details=$acnt_num.$acnt_name.$acnt_ifsc;
+$bank_details=$bank_name.$acnt_name.$acnt_num.$acnt_ifsc;
 
 // $_REQUEST['bank_details']
 
