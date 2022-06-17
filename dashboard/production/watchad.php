@@ -508,17 +508,17 @@ if (isset($_SESSION['uid'])) {
                 $temp_add_count = $row_temp['add_count'];
                 if ($temp_add_count == '') {
                 ?>
-                  <a href="<?php echo $addata['add_url']; ?>" target="_blank" data-value="<?php echo $i; ?>" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
+                  <a href="<?php echo $addata['add_url']; ?>" target="_blank" data-value="<?php echo $i; ?>" class="addlink" onclick="seeadd(this);"><?php echo $i; ?>. ClickToSeeAd</a>
                   <?php
                 } else {
                   $arr = str_split($temp_add_count);
                   if ($arr[$i - 1] == 1) {
                   ?>
-                    <a style="cursor:pointer;">ClickToSeeAd</a>
+                    <a style="cursor:pointer;"><?php echo $i; ?>. ClickToSeeAd</a>
                   <?php
                   } else {
                   ?>
-                    <a href="<?php echo $addata['add_url']; ?>" target="_blank" data-value="<?php echo $i; ?>" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
+                    <a href="<?php echo $addata['add_url']; ?>" target="_blank" data-value="<?php echo $i; ?>" class="addlink" onclick="seeadd(this);"><?php echo $i; ?>. ClickToSeeAd</a>
                 <?php
                   }
                 }
@@ -644,29 +644,12 @@ if (isset($_SESSION['uid'])) {
           userid: uid,
           length: length,
           addno: addno
-        })
-        // d.setDate(d.getDate() + 1);
-        // const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        // let day = days[d.getDay()];
-        // const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        // let month = months[d.getMonth()];
-        // if (!getCookie(uid)) {
-        //   var arr = [];
-        //   for (var i = 0; i <= length; i++) {
-        //     arr[i] = 0;
-        //   }
-        //   document.cookie = uid + "=" + arr + "; expires=" + day + ", " + d.getDate() + month + d.getFullYear() + "00:00:00 UTC";
-        // }
-        // var mycookie = getCookie(uid);
-        // var arr = mycookie.split(',');
-
-        // arr[addno] = 1;
-
-        // document.cookie = uid + "=" + arr + "; expires=" + day + ", " + d.getDate() + month + d.getFullYear() + "00:00:00 UTC";
-        // console.log(arr);
-
-        // addSeen(arr, length, uid);
-
+        }).done(
+          function(){
+            location.reload();
+          }
+        )
+        
       }
     </script>
     <script>
