@@ -82,7 +82,7 @@ if (isset($_SESSION['uid'])) {
                 $sql = "update `joinus-data` set wallet=wallet+'45' where ref_code='$ref_code' and u_id='$u_id'";
             }
             $conn->query($sql);
-            $timestmp = date('m/d/Y h:i:s a', time());
+            $timestmp = date('Y-m-d h:i:s', time());
             $sql = "INSERT INTO `transactions`(`u_id`,`date`, `mode`, `amount`) VALUES ('$u_id','$timestmp','1','45')";
             $conn->query($sql);
             // $sql = "update `joinus` set wallet=wallet+'45' where uid='$uid'";
@@ -106,7 +106,8 @@ if (isset($_SESSION['uid'])) {
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
                 $a = $row['u_id'];
-                $timestmp = date('m/d/Y h:i:s a', time());
+                $timestmp = date('Y-m-d h:i:s', time());
+                
                 $sql = "INSERT INTO `transactions`(`u_id`,`date`, `mode`, `amount`) VALUES ('$a','$timestmp','1','$inc')";
                 $conn->query($sql);
 
