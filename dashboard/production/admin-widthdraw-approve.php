@@ -10,8 +10,8 @@ if ($_POST['name'] == "approve") {
     $u_id = $row['u_id'];
     $sql = "update `joinus-data` set wallet=wallet-'$money' , widthdraw=0 where u_id='$id'";
     $conn->query($sql);
-
-    $sql = "INSERT INTO `transactions`(`u_id`, `mode`, `amount`) VALUES ('$u_id','0','$money')";
+    $timestmp = date('m/d/Y h:i:s a', time());
+    $sql = "INSERT INTO `transactions`(`u_id`,`date`, `mode`, `amount`) VALUES ('$u_id',$timestmp,'0','$money')";
     $conn->query($sql);
     
 }

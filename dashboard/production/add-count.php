@@ -6,7 +6,6 @@ if (isset($_SESSION['uid'])) {
     $uid = $_POST['userid'];
     $length = $_POST['length'];
     $addno = $_POST['addno'];
-    date_default_timezone_set('Asia/Kolkata');
     $sql = "select * from joinus where uid='$uid'";
     $result = $conn->query($sql);
     $row = mysqli_fetch_assoc($result);
@@ -80,11 +79,11 @@ if (isset($_SESSION['uid'])) {
             if(empty($ref_code)){
                 $sql = "update `joinus-data` set wallet=wallet+'45' where ref_code IS NULL";
             }else{
-                $sql = "update `joinus-data` set wallet=wallet+'45' where ref_code='$ref_code'";
+                $sql = "update `joinus-data` set wallet=wallet+'45' where ref_code='$ref_code' and u_id='$u_id'";
             }
             $conn->query($sql);
-
-            $sql = "INSERT INTO `transactions`(`u_id`, `mode`, `amount`) VALUES ('$u_id','1','45')";
+            $timestmp = date('m/d/Y h:i:s a', time());
+            $sql = "INSERT INTO `transactions`(`u_id`,`date`, `mode`, `amount`) VALUES ('$u_id',$timestmp,'1','45')";
             $conn->query($sql);
             // $sql = "update `joinus` set wallet=wallet+'45' where uid='$uid'";
             // $conn->query($sql);
@@ -107,7 +106,8 @@ if (isset($_SESSION['uid'])) {
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
                 $a = $row['u_id'];
-                $sql = "INSERT INTO `transactions`(`u_id`, `mode`, `amount`) VALUES ('$a','1','$inc')";
+                $timestmp = date('m/d/Y h:i:s a', time());
+                $sql = "INSERT INTO `transactions`(`u_id`,`date`, `mode`, `amount`) VALUES ('$a',$timestmp,'1','$inc')";
                 $conn->query($sql);
 
                 // $sql = "update `joinus` set wallet=wallet+'$inc' where my_ref_code='$ref_code'";
