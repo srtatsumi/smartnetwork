@@ -11,7 +11,7 @@ if ($_POST['name'] == "approve") {
     $sql = "update `joinus-data` set wallet=wallet-'$money' , widthdraw=0 where u_id='$id'";
     $conn->query($sql);
     $timestmp = date('m/d/Y h:i:s a', time());
-    $sql = "INSERT INTO `transactions`(`u_id`,`date`, `mode`, `amount`) VALUES ('$u_id',$timestmp,'0','$money')";
+    $sql = "INSERT INTO `transactions`(`u_id`,`date`, `mode`, `amount`) VALUES ('$u_id','$timestmp','0','$money')";
     $conn->query($sql);
     
 }
