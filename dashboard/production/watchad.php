@@ -9,7 +9,7 @@ if (isset($_SESSION['uid'])) {
   $sql = "SELECT * FROM joinus WHERE uid = '$uid'";
   $res = $conn->query($sql);
   $data = mysqli_fetch_assoc($res);
-  
+
   $my_ref_code = $data['my_ref_code'];
   $fname = $data['fname'];
   $lname = $data['lname'];
@@ -25,8 +25,8 @@ if (isset($_SESSION['uid'])) {
   $result = $conn->query($sql);
   $row = mysqli_fetch_assoc($result);
   $today =  date("Y-m-d");
-  
-  $redeemed_date=date("Y-m-d",strtotime($row['last_redeemed']));
+
+  $redeemed_date = date("Y-m-d", strtotime($row['last_redeemed']));
 
 
   // END OF USER DATA COLLECTION FORM DB
@@ -395,26 +395,26 @@ if (isset($_SESSION['uid'])) {
       </div>
     </div>
   </div>
-   <!--Bank Details Modal-->
-   <div class="modal fade" id="exampleBank" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content" style="text-align: center;">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">&nbsp;Add Bank Account</h5>
-          </div>
-          <div class="modal-body">
-            <form action="./addbankdetails.php" class="form" method="post">
-              <input type="text" name="bank_name" class="form-control" placeholder='Bank Name' required>
-              <input type="text" name="bank_accnt_name" class="form-control" placeholder='Bank Account Holder Name' required>
-              <input type="text" name="bank_accnt_num" class="form-control" placeholder='Bank Account Number' required>
-              <input type="text" name="bank_ifsc_code" class="form-control" placeholder='Bank IFSC Code' required>
-              <button class="btn btn-danger m-2" data-bs-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-success m-2" name="add_bank">Submit</button>
-            </form>
-          </div>
+  <!--Bank Details Modal-->
+  <div class="modal fade" id="exampleBank" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="text-align: center;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">&nbsp;Add Bank Account</h5>
+        </div>
+        <div class="modal-body">
+          <form action="./addbankdetails.php" class="form" method="post">
+            <input type="text" name="bank_name" class="form-control" placeholder='Bank Name' required>
+            <input type="text" name="bank_accnt_name" class="form-control" placeholder='Bank Account Holder Name' required>
+            <input type="text" name="bank_accnt_num" class="form-control" placeholder='Bank Account Number' required>
+            <input type="text" name="bank_ifsc_code" class="form-control" placeholder='Bank IFSC Code' required>
+            <button class="btn btn-danger m-2" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success m-2" name="add_bank">Submit</button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
   <div class="container body">
     <div class="main_container">
@@ -468,64 +468,89 @@ if (isset($_SESSION['uid'])) {
       <!-- /top navigation -->
 
       <!-- HAAT MAT LAGAO -->
-        <div class="right_col" role="main">
-            <div class="tile_count">
-                <div class="row">
-                <div class="col-md-12 col-sm-12 ">
-                    <div class="tile_count">
-                    <div class="row x_title">
-                    </div>
-                    </div>
+      <div class="right_col" role="main">
+        <div class="tile_count">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+              <div class="tile_count">
+                <div class="row x_title">
                 </div>
-                </div>
+              </div>
             </div>
-            <!-- HAT MAT LAGAO END -->
-            <!-- Header Count Sayed -->
-            
-                <?php 
-                    $adssql = "SELECT * FROM adds";
-                    $adres = $conn->query($adssql);
-                    if($adres->num_rows<1){
-                        echo "No Ads found";
-                    }
-                    $i=1;
-                ?>
-            <div id="">
-                <div class="row">
-                <input type="hidden" name="uid" id="uid" value="<?php echo $uid; ?>">
-                <input type="hidden" name="adcount" id="adcount" value="<?php echo $adres->num_rows; ?>">
-                <?php
-                    
-                    while($addata = mysqli_fetch_assoc($adres)):
-
-                ?>
-                    
-                    <div class="colored_card col-md-2 col-sm-6">
-                        <a href="<?php echo $addata["add_url"] ?>" target="_blank" data-value="<?php echo $i ?>" class="addlink" onclick="seeadd(this);"><?php echo $i ?> Click To See Ad</a>
-                    </div>
-                    
-                <?php
-                    $i++;
-                    endwhile;
-                ?>
-                    <!------adsence----->
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7556331893650213" crossorigin="anonymous"></script>
-                    <!----close---->
-                </div>
-            </div>
-            
-            <!-- Header Count Sayed End-->
+          </div>
         </div>
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            All rights reserved. Copyright © <script>
-              document.write(new Date().getFullYear())
-            </script> Smart Network by <a>Healing Buddy Technologies</a>. </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-      
+        <!-- HAT MAT LAGAO END -->
+        <!-- Header Count Sayed -->
+
+        <?php
+        $adssql = "SELECT * FROM adds";
+        $adres = $conn->query($adssql);
+        if ($adres->num_rows < 1) {
+          echo "No Ads found";
+        }
+        $i = 1;
+        ?>
+        <div id="">
+          <div class="row">
+            <input type="hidden" name="uid" id="uid" value="<?php echo $uid; ?>">
+            <input type="hidden" name="adcount" id="adcount" value="<?php echo $adres->num_rows; ?>">
+            <?php
+
+            while ($addata = mysqli_fetch_assoc($adres)) :
+
+            ?>
+
+              <div class="colored_card col-md-2 col-sm-6">
+                <?php
+                $sql = "select * from `joinus-data` where u_id='$u_id'";
+                $result_temp = $conn->query($sql);
+                $row_temp = $result_temp->fetch_assoc();
+                $temp_add_count = $row_temp['add_count'];
+                if ($temp_add_count == '') {
+                ?>
+                  <a href="<?php echo $addata['add_url']; ?>" target="_blank" data-value="<?php echo $i; ?>" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
+                  <?php
+                } else {
+                  $arr = str_split($temp_add_count);
+                  if ($arr[$i - 1] == 1) {
+                  ?>
+                    <a style="cursor:pointer;">ClickToSeeAd</a>
+                  <?php
+                  } else {
+                  ?>
+                    <a href="<?php echo $addata['add_url']; ?>" target="_blank" data-value="<?php echo $i; ?>" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
+                <?php
+                  }
+                }
+                ?>
+
+                <!-- <a href="<?php echo $addata["add_url"] ?>" target="_blank" data-value="<?php echo $i ?>" class="addlink" onclick="seeadd(this);"><?php echo $i ?> Click To See Ad</a> -->
+
+
+              </div>
+
+            <?php
+              $i++;
+            endwhile;
+            ?>
+            <!------adsence----->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7556331893650213" crossorigin="anonymous"></script>
+            <!----close---->
+          </div>
+        </div>
+
+        <!-- Header Count Sayed End-->
+      </div>
+      <!-- footer content -->
+      <footer>
+        <div class="pull-right">
+          All rights reserved. Copyright © <script>
+            document.write(new Date().getFullYear())
+          </script> Smart Network by <a>Healing Buddy Technologies</a>. </div>
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
+
     </div>
 
     <!-- jQuery -->
@@ -645,19 +670,18 @@ if (isset($_SESSION['uid'])) {
       }
     </script>
     <script>
-    
-      function amountCheck(){
-          var amount=document.getElementById('withdraw-amount');
-          if(amount.innerText<500){
-              button.style.display = "none";
-              document.getElementById('withdraw_notice').innerHTML="You Can withdraw after wllet balance is 500.0/-";
-          }
+      function amountCheck() {
+        var amount = document.getElementById('withdraw-amount');
+        if (amount.innerText < 500) {
+          button.style.display = "none";
+          document.getElementById('withdraw_notice').innerHTML = "You Can withdraw after wllet balance is 500.0/-";
+        }
       }
       var form = document.getElementById('widthdraw-form');
       var button = document.getElementById('widthdraw-button');
-      
-      
-      
+
+
+
       form.style.display = "none";
       button.style.display = "block";
       document.getElementById("widthdraw-button").addEventListener("click", function(event) {
