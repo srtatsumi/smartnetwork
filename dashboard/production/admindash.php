@@ -2,6 +2,7 @@
 session_start();
 if (isset($_SESSION['uid'])) {
     include("../../dbconfig.php");
+    date_default_timezone_set("Asia/Kolkata");
     $uid = $_SESSION['uid'];
     
     // echo $uid;

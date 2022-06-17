@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION['uid'])) {
     include("../../dbconfig.php");
     $uid = $_SESSION['uid'];
-
+    date_default_timezone_set("Asia/Kolkata");
     // echo $uid;
 
     // GET USER DATA FOR NOW NAME ONLY.
