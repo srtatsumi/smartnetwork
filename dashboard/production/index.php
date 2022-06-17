@@ -529,7 +529,7 @@ if (isset($_SESSION['uid'])) {
 
         <div id="paginated_gallery" class="gallery">
           <div class="gallery_scroller no_snap">
-            
+
             <?php
             $sql = "select * from adds where add_status='Enable'";
             $add_result = $conn->query($sql);
@@ -540,7 +540,28 @@ if (isset($_SESSION['uid'])) {
                 $i++;
             ?>
                 <div class="colored_card">
-                  <p></p> <a href="<?php echo $add['add_url']; ?>" target="_blank" data-value="<?php echo $i; ?>" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
+                  <?php
+                  $sql = "select * from `joinus-data` where u_id='$u_id'";
+                  $result_temp = $conn->query($sql);
+                  $row_temp = $result_temp->fetch_assoc();
+                  $temp_add_count = $row_temp['add_count'];
+                  if ($temp_add_count == '') {
+                  ?>
+                    <a href="<?php echo $add['add_url']; ?>" target="_blank" data-value="<?php echo $i; ?>" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
+                    <?php
+                  } else {
+                    $arr = str_split($temp_add_count);
+                    if ($arr[$i - 1] == 1) {
+                    ?>
+                      <a style="cursor:pointer;">ClickToSeeAdd</a>
+                    <?php
+                    } else {
+                    ?>
+                      <a href="<?php echo $add['add_url']; ?>" target="_blank" data-value="<?php echo $i; ?>" class="addlink" onclick="seeadd(this);">ClickToSeeAd</a>
+                  <?php
+                    }
+                  }
+                  ?>
                 </div>
 
             <?php
