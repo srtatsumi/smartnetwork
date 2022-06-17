@@ -58,7 +58,7 @@ if (isset($_SESSION['uid'])) {
           $total_price = (int)$wal_val + (int)$exist_price;
           $sql = "UPDATE `joinus-data` SET wallet = '$total_price' WHERE my_ref_code = '$ref'";
           $timestmp = date('Y-m-d h:i:s', time());
-          $sql = "INSERT INTO `transactions`(`u_id`,`date`, `mode`, `amount`) VALUES ('$data[u_id]','$timestmp','1','$wal_val')";
+          $transactionsql = "INSERT INTO `transactions`(`u_id`,`date`, `mode`, `amount`) VALUES ('$data[u_id]','$timestmp','1','$wal_val')";
           $conn->query($transactionsql);
           
           $res = $conn->query($sql);
