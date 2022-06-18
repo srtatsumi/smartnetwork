@@ -1,5 +1,8 @@
 <?php 
   session_start();
+if($_SESSION['role'] !='admin'){
+    echo '<script>document.location.href="adminlogin.php"</script>';
+}
   if(isset($_POST['chngSt'])){
     include("../../dbconfig.php");
     $uid = $_SESSION['uid'];

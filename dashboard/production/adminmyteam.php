@@ -1,5 +1,9 @@
 <?php 
-  session_start();
+session_start();
+if($_SESSION['role'] !='admin'){
+    echo '<script>document.location.href="adminlogin.php"</script>';
+}
+
   if(isset($_POST['chngSt'])){
     include("../../dbconfig.php");
     $uid = $_SESSION['uid'];
@@ -37,7 +41,7 @@
     // END OF MY TEAM
   }else{
     // header("Location: ../../pages/sign-in.php");
-    echo '<script>document.location.href="../../sign-in.php"</script>';
+    echo '<script>document.location.href="adminlogin.php"</script>';
   }
 ?>
 

@@ -1,5 +1,8 @@
 <?php 
   session_start();
+    if($_SESSION['role'] !='admin'){
+        echo '<script>document.location.href="adminlogin.php"</script>';
+    }
   if(isset($_POST['chngSt'])){
     include("../../dbconfig.php");
     $uid = $_SESSION['uid'];
@@ -37,7 +40,7 @@
     // END OF MY TEAM
   }else{
     // header("Location: ../../pages/sign-in.php");
-    echo '<script>document.location.href="../../sign-in.php"</script>';
+    echo '<script>document.location.href="adminlogin.php"</script>';
   }
 ?>
 
@@ -161,6 +164,7 @@
                                                             <th>8th</th>
                                                             <th>9th</th>
                                                             <th>10th</th>
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -318,6 +322,18 @@
                                                             <td><?php echo $eight;?></td>
                                                             <td><?php echo $nine;?></td>
                                                             <td><?php echo $ten;?></td>
+                                                            <td>
+                                                                <?php
+                                                                if($first==0):
+                                                                ?>
+                                                                <a href='adminmemdelete.php?refcd=<?php echo "$row[my_ref_code]"?>'>Delete</a>
+                                                                <?php
+                                                                else:
+                                                                echo "Cannot Delete this member has downline";
+                                                                endif;
+                                                                ?>
+                                                                
+                                                            </td>
                                                         </tr>
                                                         <?php } ?>
                                                     </tbody>
