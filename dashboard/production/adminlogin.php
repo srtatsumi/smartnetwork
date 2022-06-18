@@ -11,6 +11,7 @@
     if ($n>0) {
       session_start();
       $_SESSION['uid'] = $uid;
+      $_SESSION['role'] = 'admin';
       // session_unset(); REMOVE ALL SESSINO VARIABLE
       // session_destroy() Destroy current session
       echo '<script>alert("Valid Credentials !!!")</script>';
