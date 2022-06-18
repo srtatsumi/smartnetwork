@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
         $level = $row['level'] + 1;
         
         // Inserting the data into joinus-data table
-        $sql = "INSERT INTO `joinus-data`(`u_id`, `p_id`, `ref_code`, `my_ref_code`, `level`) VALUES ('$uid','$p_id','$ref_code','$my_ref_id','$level')";
+        $sql = "INSERT INTO `joinus-data`(`u_id`, `p_id`, `ref_code`, `my_ref_code`, `level`,`last_redeemed`) VALUES ('$uid','$p_id','$ref_code','$my_ref_id','$level','')";
         $conn->query($sql);
 
  

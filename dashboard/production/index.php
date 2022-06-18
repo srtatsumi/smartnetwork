@@ -72,7 +72,7 @@ if (isset($_SESSION['uid'])) {
     }else{
       $sql = "update `joinus-data` set widthdraw='$money' where u_id='$u_id'";
       if($conn->query($sql)){
-        echo "<script>alert('Your money will be credited in an hour');</script>";
+        echo "<script>alert('Your money will be credited within 24-36 hours');</script>";
       }else
       echo "<script>alert('Server Down. Please try again later.');</script>";
     }
