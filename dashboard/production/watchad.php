@@ -9,7 +9,7 @@ if (isset($_SESSION['uid'])) {
   $sql = "SELECT * FROM joinus WHERE uid = '$uid'";
   $res = $conn->query($sql);
   $data = mysqli_fetch_assoc($res);
-
+  
   $my_ref_code = $data['my_ref_code'];
   $fname = $data['fname'];
   $lname = $data['lname'];
@@ -69,7 +69,7 @@ if (isset($_SESSION['uid'])) {
     } else {
       $sql = "update `joinus-data` set widthdraw='$money' where u_id='$u_id'";
       if ($conn->query($sql)) {
-        echo "<script>alert('Your money will be credited in an hour');</script>";
+        echo "<script>alert('Your money will be credited within 24-36 hours');</script>";
       } else
         echo "<script>alert('Server Down. Please try again later.');</script>";
     }
@@ -483,6 +483,10 @@ if (isset($_SESSION['uid'])) {
         <!-- Header Count Sayed -->
 
         <?php
+        // var_dump($data);
+        if($data["status"]=="Deactivate"):
+          echo "<h3>You need to be a Active Member to watch Ads. Please wait to be a active member.</h3>";
+        else:
         $adssql = "SELECT * FROM adds";
         $adres = $conn->query($adssql);
         if ($adres->num_rows < 1) {
@@ -497,7 +501,6 @@ if (isset($_SESSION['uid'])) {
             <?php
 
             while ($addata = mysqli_fetch_assoc($adres)) :
-
             ?>
 
               <div class="colored_card col-md-2 col-sm-6">
@@ -538,7 +541,9 @@ if (isset($_SESSION['uid'])) {
             <!----close---->
           </div>
         </div>
-
+        <?php 
+        endif;
+        ?>    
         <!-- Header Count Sayed End-->
       </div>
       <!-- footer content -->
