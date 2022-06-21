@@ -510,7 +510,7 @@ if (isset($_SESSION['uid'])) {
                             <td><?php echo date('d-m-Y',$dt); ?></td>
                             <td><?php echo date('H:i:s',$dt); ?></td>
                             <?php if ($r['mode'] == 0) {
-                              echo '<td class="text-danger"> - ' . $r['amount'] . '</td>';
+                              echo '<td class="text-danger"> - ' . $r['amount'] . ' (Wallet Withdraw Amount) </td>';
                             } else {
                               echo '<td class="text-success"> + ' . $r['amount'] . '</td>';
                             } ?>
