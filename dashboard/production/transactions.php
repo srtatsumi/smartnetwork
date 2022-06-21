@@ -512,7 +512,7 @@ if (isset($_SESSION['uid'])) {
                             <?php if ($r['mode'] == 0) {
                               echo '<td class="text-danger"> - ' . $r['amount'] . ' (Wallet Withdraw Amount) </td>';
                             } else {
-                              // echo '<td class="text-success"> + ' . $r['amount'] . '</td>';
+                              echo '<td class="text-success"> + ' . $r['amount'] . '</td>';
                             } ?>
                           </tr>
                         <?php
